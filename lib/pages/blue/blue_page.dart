@@ -8,12 +8,18 @@ class BluePage extends StatefulWidget {
   State<BluePage> createState() => _BluePageState();
 }
 
-class _BluePageState extends State<BluePage> with AutomaticKeepAliveClientMixin<BluePage>{
+class _BluePageState extends State<BluePage>{
   int _counter = 0;
 
   @override
+  void initState() {
+    super.initState();
+
+    _counter = PageStorage.of(context).readState(context, identifier: widget.key) ?? 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    super.build(context);
     debugPrint('🔵--------build BluePage');
     final bgPage = Colors.blue[200];
 
@@ -60,10 +66,8 @@ class _BluePageState extends State<BluePage> with AutomaticKeepAliveClientMixin<
     if (counter != null) {
       setState(() {
         _counter = counter;
+        PageStorage.of(context).writeState(context, _counter, identifier: widget.key);
       });
     }
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
