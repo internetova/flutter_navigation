@@ -16,11 +16,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _currentIndex = 0;
+  /// PageStorageBucket - это объект в Flutter, который используется для хранения и управления
+  /// данными, которые должны быть сохранены между страницами в PageView или других виджетах,
+  /// поддерживающих сохранение состояния страниц.
+  final _bucket = PageStorageBucket();
 
   final List<Widget> _pages = const [
-    RedPage(),
-    BluePage(),
-    GreenPage(),
+    RedPage(key: PageStorageKey('RedPage')),
+    BluePage(key: PageStorageKey('BluePage')),
+    GreenPage(key: PageStorageKey('GreenPage')),
   ];
 
   final PageController _pageController = PageController(
@@ -39,16 +43,19 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: PageView(
-          controller: _pageController,
-          onPageChanged: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-          /// Запретить свайпы
-          // physics: const NeverScrollableScrollPhysics(),
-          children: _pages,
+        body: PageStorage(
+          bucket: _bucket,
+          child: PageView(
+            controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
+            /// Запретить свайпы
+            // physics: const NeverScrollableScrollPhysics(),
+            children: _pages,
+          ),
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentIndex,
