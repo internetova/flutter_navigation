@@ -1,16 +1,10 @@
-# flutter_navigation
+# Примеры реализации нижней навигации
 
-A new Flutter project.
+## Часть 1. Базовые примеры
 
-## Getting Started
+- main - список виджетов
+- IndexedStack - реализация с помощью IndexedStack
+- PageView - реализация с помощью PageView + сохранение состояния
+- PageView-PageStorage - реализация с помощью PageView + сохранение состояния в PageStorage
+- Offstage - реализация с помощью Offstage
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
