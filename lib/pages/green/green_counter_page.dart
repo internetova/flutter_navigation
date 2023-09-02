@@ -25,7 +25,7 @@ class _CounterPageState extends State<GreenCounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('🟢--------build GreenPage');
+    debugPrint('🟢--------build GreenCounterPage');
 
     return Scaffold(
       appBar: AppBar(
