@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigation/pages/red/red_counter_page.dart';
 
-class RedPage extends StatelessWidget {
+class RedPage extends StatefulWidget {
   const RedPage({Key? key}) : super(key: key);
+
+  @override
+  State<RedPage> createState() => _RedPageState();
+}
+
+class _RedPageState extends State<RedPage> {
+  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +26,14 @@ class RedPage extends StatelessWidget {
               'RedPage',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const SizedBox(height: 20),
+            Text(
+              'Counter $_counter',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
             const SizedBox(height: 100),
             FilledButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => RedCounterPage(
-                      title: 'RedCounterPage',
-                      backgroundColor: bgPage,
-                    ),
-                  ),
-                );
-              },
+              onPressed: () => _goCounter(bgPage),
               style: FilledButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white),
               ),
@@ -40,5 +43,22 @@ class RedPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _goCounter(Color? backgroundColor) async {
+    final counter = await Navigator.of(context).push<int>(
+      MaterialPageRoute(
+        builder: (_) => RedCounterPage(
+          title: 'RedCounterPage',
+          backgroundColor: backgroundColor,
+        ),
+      ),
+    );
+
+    if (counter != null) {
+      setState(() {
+        _counter = counter;
+      });
+    }
   }
 }
