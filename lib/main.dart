@@ -23,6 +23,13 @@ class _MyAppState extends State<MyApp> {
     GreenPage(),
   ];
 
+  final PageController _pageController = PageController(
+    initialPage: 0,
+    /// Это означает, что PageController запомнит, на какой странице он находится,
+    /// если она будет уничтожена и воссоздана заново.
+    keepPage: true,
+  );
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -32,8 +39,15 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
       ),
       home: Scaffold(
-        body: IndexedStack(
-          index: _currentIndex,
+        body: PageView(
+          controller: _pageController,
+          onPageChanged: (index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+          /// Запретить свайпы
+          // physics: const NeverScrollableScrollPhysics(),
           children: _pages,
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -41,6 +55,12 @@ class _MyAppState extends State<MyApp> {
           onTap: (index) {
             setState(() {
               _currentIndex = index;
+              /// В данном примере понадобится управлять контроллером, иначе не будет работать прокрутка
+              _pageController.animateToPage(
+                index,
+                duration: const Duration(milliseconds: 500),
+                curve: Curves.ease,
+              );
             });
           },
           items: const [
