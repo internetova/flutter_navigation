@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_navigation/pages/widgets/counter_back_button.dart';
 
 class GreenCounterPage extends StatefulWidget {
   final String title;
@@ -31,6 +32,7 @@ class _CounterPageState extends State<GreenCounterPage> {
       appBar: AppBar(
         backgroundColor: widget.backgroundColor,
         title: Text(widget.title),
+        leading: CounterBackButton(counter: _counter),
       ),
       body: Center(
         child: Column(

@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_navigation/pages/green/green_counter_page.dart';
 
-class GreenPage extends StatelessWidget {
+class GreenPage extends StatefulWidget {
   const GreenPage({Key? key}) : super(key: key);
+
+  @override
+  State<GreenPage> createState() => _GreenPageState();
+}
+
+class _GreenPageState extends State<GreenPage> {
+  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +26,14 @@ class GreenPage extends StatelessWidget {
               'GreenPage',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            const SizedBox(height: 20),
+            Text(
+              'Counter $_counter',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
             const SizedBox(height: 100),
             FilledButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => GreenCounterPage(
-                      title: 'GreenCounterPage',
-                      backgroundColor: bgPage,
-                    ),
-                  ),
-                );
-              },
+              onPressed: () => _goCounter(bgPage),
               style: FilledButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(color: Colors.white),
                 backgroundColor: Colors.green,
@@ -41,5 +44,22 @@ class GreenPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _goCounter(Color? backgroundColor) async {
+    final counter = await Navigator.of(context).push<int>(
+      MaterialPageRoute(
+        builder: (_) => GreenCounterPage(
+          title: 'RedCounterPage',
+          backgroundColor: backgroundColor,
+        ),
+      ),
+    );
+
+    if (counter != null) {
+      setState(() {
+        _counter = counter;
+      });
+    }
   }
 }
