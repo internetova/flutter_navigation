@@ -1,16 +1,9 @@
-# flutter_navigation
+# flutter_navigation IndexedStack
 
-A new Flutter project.
+Благодаря IndexedStack можно сохранять состояние экрана.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Полезные ссылки
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [https://api.flutter.dev/flutter/widgets/IndexedStack-class.html](https://api.flutter.dev/flutter/widgets/IndexedStack-class.html)
+- [https://youtu.be/_O0PPD1Xfbk?si=5kspIHYGcSDq35Le](https://youtu.be/_O0PPD1Xfbk?si=5kspIHYGcSDq35Le)
