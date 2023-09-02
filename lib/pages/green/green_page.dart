@@ -8,12 +8,18 @@ class GreenPage extends StatefulWidget {
   State<GreenPage> createState() => _GreenPageState();
 }
 
-class _GreenPageState extends State<GreenPage> with AutomaticKeepAliveClientMixin<GreenPage> {
+class _GreenPageState extends State<GreenPage> {
   int _counter = 0;
 
   @override
+  void initState() {
+    super.initState();
+
+    _counter = PageStorage.of(context).readState(context, identifier: widget.key) ?? 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    super.build(context);
     debugPrint('🟢--------build GreenPage');
     final bgPage = Colors.green[200];
 
@@ -60,10 +66,8 @@ class _GreenPageState extends State<GreenPage> with AutomaticKeepAliveClientMixi
     if (counter != null) {
       setState(() {
         _counter = counter;
+        PageStorage.of(context).writeState(context, _counter, identifier: widget.key);
       });
     }
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
