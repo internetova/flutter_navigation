@@ -25,7 +25,7 @@ class _CounterPageState extends State<BlueCounterPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('🔵--------build BluePage');
+    debugPrint('🔵--------build BlueCounterPage');
 
     return Scaffold(
       appBar: AppBar(
