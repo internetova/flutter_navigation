@@ -8,16 +8,18 @@ class RedPage extends StatefulWidget {
   State<RedPage> createState() => _RedPageState();
 }
 
-/// В этом примере AutomaticKeepAliveClientMixin используется для сохранения состояния виджета
-/// _RedPageState, когда он находится вне области видимости и восстанавливает его при возвращении.
-class _RedPageState extends State<RedPage> with AutomaticKeepAliveClientMixin<RedPage> {
+class _RedPageState extends State<RedPage> {
   int _counter = 0;
 
   @override
-  Widget build(BuildContext context) {
-    /// Для AutomaticKeepAliveClientMixin
-    super.build(context);
+  void initState() {
+    super.initState();
 
+    _counter = PageStorage.of(context).readState(context, identifier: widget.key) ?? 0;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     debugPrint('🔴--------build RedPage');
     final bgPage = Colors.red[200];
 
@@ -63,10 +65,8 @@ class _RedPageState extends State<RedPage> with AutomaticKeepAliveClientMixin<Re
     if (counter != null) {
       setState(() {
         _counter = counter;
+        PageStorage.of(context).writeState(context, _counter, identifier: widget.key);
       });
     }
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
