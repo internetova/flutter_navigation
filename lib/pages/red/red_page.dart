@@ -15,6 +15,7 @@ class _RedPageState extends State<RedPage> {
   void initState() {
     super.initState();
 
+    /// Получаем значение счетчика из хранилища
     _counter = PageStorage.of(context).readState(context, identifier: widget.key) ?? 0;
   }
 
@@ -65,6 +66,7 @@ class _RedPageState extends State<RedPage> {
     if (counter != null) {
       setState(() {
         _counter = counter;
+        /// Сохраним новое значение счетчика в хранилище
         PageStorage.of(context).writeState(context, _counter, identifier: widget.key);
       });
     }
